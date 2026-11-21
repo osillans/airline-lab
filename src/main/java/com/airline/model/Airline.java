@@ -63,4 +63,20 @@ public class Airline {
         sorted.sort(Comparator.comparingInt(Aircraft::getRangeKm));
         return sorted;
     }
+
+    public List<Aircraft> findAircraftByFuelConsumption(
+            double minKgPerHour, double maxKgPerHour) {
+        if (minKgPerHour > maxKgPerHour) {
+            throw new IllegalArgumentException(
+                    "Minimum fuel consumption must not exceed maximum");
+        }
+        List<Aircraft> found = new ArrayList<>();
+        for (Aircraft aircraft : fleet) {
+            double consumption = aircraft.getFuelConsumptionKgPerHour();
+            if (consumption >= minKgPerHour && consumption <= maxKgPerHour) {
+                found.add(aircraft);
+            }
+        }
+        return found;
+    }
 }

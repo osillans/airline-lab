@@ -110,4 +110,28 @@ class AirlineTest {
         assertTrue(new Airline("Empty Air").getFleetSortedByRange()
                 .isEmpty());
     }
+
+    @Test
+    void findsAircraftInsideFuelRange() {
+        assertEquals(List.of(boeing),
+                airline.findAircraftByFuelConsumption(2000, 3000));
+    }
+
+    @Test
+    void fuelRangeBoundsAreInclusive() {
+        assertEquals(List.of(boeing, atr),
+                airline.findAircraftByFuelConsumption(650, 2500));
+    }
+
+    @Test
+    void returnsEmptyListWhenNoAircraftMatches() {
+        assertTrue(airline.findAircraftByFuelConsumption(3000, 5000)
+                .isEmpty());
+    }
+
+    @Test
+    void rejectsInvertedFuelRange() {
+        assertThrows(IllegalArgumentException.class,
+                () -> airline.findAircraftByFuelConsumption(3000, 2000));
+    }
 }
