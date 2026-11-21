@@ -44,4 +44,10 @@ class PassengerAircraftTest {
     void rejectsNegativeBaggageCapacity() {
         assertThrows(IllegalArgumentException.class, () -> create(189, -1));
     }
+
+    @Test
+    void rejectsNotANumberBaggageCapacity() {
+        assertThrows(IllegalArgumentException.class,
+                () -> create(189, Double.NaN));
+    }
 }
