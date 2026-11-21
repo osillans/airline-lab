@@ -2,6 +2,7 @@ package com.airline.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Airline {
@@ -55,5 +56,11 @@ public class Airline {
             total += aircraft.getCargoCapacityKg();
         }
         return total;
+    }
+
+    public List<Aircraft> getFleetSortedByRange() {
+        List<Aircraft> sorted = new ArrayList<>(fleet);
+        sorted.sort(Comparator.comparingInt(Aircraft::getRangeKm));
+        return sorted;
     }
 }

@@ -91,4 +91,23 @@ class AirlineTest {
         assertEquals(0, empty.getTotalPassengerCapacity());
         assertEquals(0.0, empty.getTotalCargoCapacityKg(), 0.001);
     }
+
+    @Test
+    void sortsFleetByRangeAscending() {
+        assertEquals(List.of(atr, antonov, boeing),
+                airline.getFleetSortedByRange());
+    }
+
+    @Test
+    void sortingDoesNotChangeOriginalOrder() {
+        airline.getFleetSortedByRange();
+
+        assertEquals(List.of(boeing, atr, antonov), airline.getFleet());
+    }
+
+    @Test
+    void sortingEmptyFleetGivesEmptyList() {
+        assertTrue(new Airline("Empty Air").getFleetSortedByRange()
+                .isEmpty());
+    }
 }
